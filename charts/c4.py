@@ -1,11 +1,17 @@
 import os; HERE=os.path.dirname(os.path.abspath(__file__)); exec(open(os.path.join(HERE,'prep.py')).read()); exec(open(os.path.join(HERE,'style.py')).read())
 import numpy as np, matplotlib.dates as mdates
 END=pd.Timestamp('2026-11-18'); CUT=END-pd.DateOffset(months=6)
-f=F[(F.announcements>=9)&(F.benchmark_family!='Bench')].sort_values('first_seen').reset_index(drop=True)
+f=F[(F.announcements>=9)&(F.benchmark_family!='Bench')].copy()
 LA=set(zip(A.date,A.provider))
+URL_DATE=A.dropna(subset=['url']).assign(u=A.url.str.rstrip('/')).drop_duplicates('u').set_index('u').date
 RC=R.assign(provider=R.Provider.replace({'Alibaba':'Alibaba Qwen','Mistral AI':'Mistral'}),fam=R['Benchmark (counting label)'].str.lower())
-RC=RC[[k in LA for k in zip(RC.date,RC.provider)]]
-f['last_seen']=pd.concat([f.last_seen,f.benchmark_family.str.lower().map(RC.groupby('fam').date.max())],axis=1).max(axis=1)
+in_A=pd.Series([k in LA for k in zip(RC.date,RC.provider)],index=RC.index)
+RC['date']=RC['Official announcement'].str.rstrip('/').map(URL_DATE).fillna(RC.date.where(in_A))
+RC=RC.dropna(subset=['date'])
+fam_l=f.benchmark_family.str.lower()
+f['first_seen']=pd.concat([f.first_seen,fam_l.map(RC.groupby('fam').date.min())],axis=1).min(axis=1)
+f['last_seen']=pd.concat([f.last_seen,fam_l.map(RC.groupby('fam').date.max())],axis=1).max(axis=1)
+f=f.sort_values('first_seen').reset_index(drop=True)
 f['dead']=f.last_seen<CUT
 fig=canvas('Chart 4 · Lifespans','The Benchmark Graveyard',
  f'Every launch-post citation of the {len(f)} most-cited benchmarks. Grey rows (†) have\nnot appeared in any launch post for 6+ months. {f.dead.sum()} of {len(f)} are already gone, and\nSWE-bench Verified, the coding benchmark of 2025, is close behind.','4/6')
