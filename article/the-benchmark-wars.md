@@ -123,17 +123,23 @@ You can learn a lot about a lab's strategy from which benchmarks it puts first. 
 
 ## What this means if you build with these models
 
-I spend most of my time building AI systems, not ranking them, and these charts have changed how I read a launch post:
+These charts changed how I read a launch post:
 
 1. **Start with the shared nine.** If a lab reports GPQA Diamond, SWE-bench, Terminal-Bench, AIME or HLE, you can compare it with competitors. Look at those rows first and treat everything else as marketing until it is independently reproduced.
 2. **Notice what's missing.** With 1,024 benchmarks available, *leaving one out* is a choice. If a lab stops reporting a benchmark its competitors still cite, ask why.
-3. **Expect any benchmark to last about 18 months.** If your product decision rests on a benchmark gap, check when that benchmark first appeared. A gap on a nearly saturated test is mostly noise.
-4. **Build your own evals.** The main lesson of the graveyard is that public benchmarks are temporary. The only scoreboard that lasts is one built on your own tasks, data and failure modes.
+3. **Expect any benchmark to last about 18 months.** A gap on a nearly saturated test is mostly noise.
+4. **Build your own evals.** Public benchmarks are temporary; a scoreboard built on your own tasks and failure modes lasts.
 
-Benchmarks were meant to be a shared ruler for AI progress. Eight years of launch posts show something closer to a negotiation. Every lab brings its own ruler, the ruler wears out within about two years, and next year's launch posts will be scored mostly on tests that don't exist yet.
+## Conclusion: read the scoreboard, not just the score
+
+Benchmarks were meant to be a shared ruler for AI progress. Eight years of launch posts show something closer to a negotiation. Most benchmarks are used by one lab, launch tables keep growing, hard tests hit the ceiling in about 18 months, and two-thirds of 2026's citations are for tests that are new this year.
+
+None of this makes benchmarks useless. It means a launch post shows the view of a model its lab chose to show. The useful questions are which tests were picked, which were left out, and how close each is to saturation.
+
+Next year's launches will mostly be scored on tests that don't exist yet. Knowing how the scoreboard is built will tell you more than the top number.
 
 ---
 
 ### Methodology
 
-The dataset covers 197 official, first-party launch posts and model pages from 11 labs, from GPT-1 (11 June 2018) to 18 November 2026. Benchmarks were extracted from HTML tables, announcement text, chart alt text, OCR of benchmark images and manual curation. They were then grouped into benchmark families and counted once per announcement. Scores are as published by each lab, not independently verified, and settings (tools, attempts, compute) vary between launches. "Best published score" in Chart 3 is the highest number any lab reported for that benchmark up to that date. A benchmark counts as "retired" in Chart 4 if no launch post cited it in the six months before 18 November 2026. Some launch pages render charts only as images, so a small number of results may be missing.
+The dataset covers 197 official, first-party launch posts and model pages from 11 labs, from GPT-1 (11 June 2018) to 18 November 2026. Benchmarks were extracted from tables, text, alt text and OCR of chart images, grouped into families and counted once per announcement. Scores are as published by each lab, not independently verified, and settings (tools, attempts, compute) vary between launches. "Best published score" in Chart 3 is the highest number any lab reported for that benchmark up to that date. A benchmark counts as "retired" in Chart 4 if no launch post cited it in the six months before 18 November 2026.
