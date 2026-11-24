@@ -2,13 +2,17 @@ import os; HERE=os.path.dirname(os.path.abspath(__file__)); exec(open(os.path.jo
 import numpy as np, matplotlib.dates as mdates
 END=pd.Timestamp('2026-11-18'); CUT=END-pd.DateOffset(months=6)
 f=F[(F.announcements>=9)&(F.benchmark_family!='Bench')].sort_values('first_seen').reset_index(drop=True)
+LA=set(zip(A.date,A.provider))
+RC=R.assign(provider=R.Provider.replace({'Alibaba':'Alibaba Qwen','Mistral AI':'Mistral'}),fam=R['Benchmark (counting label)'].str.lower())
+RC=RC[[k in LA for k in zip(RC.date,RC.provider)]]
+f['last_seen']=pd.concat([f.last_seen,f.benchmark_family.str.lower().map(RC.groupby('fam').date.max())],axis=1).max(axis=1)
 f['dead']=f.last_seen<CUT
 fig=canvas('Chart 4 · Lifespans','The Benchmark Graveyard',
- f'Every launch-post citation of the {len(f)} most-cited benchmarks. Grey rows (†) have\nnot appeared in any launch post for 6+ months. {f.dead.sum()} of {len(f)} are already gone,\nincluding SWE-bench Verified, the coding benchmark of 2025.','4/6')
+ f'Every launch-post citation of the {len(f)} most-cited benchmarks. Grey rows (†) have\nnot appeared in any launch post for 6+ months. {f.dead.sum()} of {len(f)} are already gone, and\nSWE-bench Verified, the coding benchmark of 2025, is close behind.','4/6')
 ax=fig.add_axes([0.30,0.09,0.64,0.66])
 ycol={2020:'#4C8DFF',2021:'#4C8DFF',2023:'#4C8DFF',2024:'#2DD4BF',2025:ACC2,2026:ACC}
 for i,r in f.iterrows():
-    d=SF[SF.benchmark_family==r.benchmark_family].date.dropna()
+    d=pd.concat([SF[SF.benchmark_family==r.benchmark_family].date,RC[RC.fam==r.benchmark_family.lower()].date]).dropna().drop_duplicates()
     c=DIM if r.dead else ycol.get(r.first_seen.year,FG)
     ax.plot([r.first_seen,r.last_seen if r.dead else END],[i,i],color=c,lw=1.2,alpha=0.9 if not r.dead else 0.8,ls='-' if not r.dead else (0,(2,2)))
     if not r.dead: ax.plot([r.first_seen,END],[i,i],color=c,lw=7,alpha=0.08,solid_capstyle='round')

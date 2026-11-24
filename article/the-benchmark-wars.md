@@ -76,18 +76,16 @@ Still, the overall result is hard to dispute. A benchmark that is meant to be ha
 
 When a benchmark saturates, labs don't announce that it's retired. They just stop citing it.
 
-This chart follows the 45 most-cited benchmarks. Each dot is one launch post that cited it. Rows marked † haven't appeared in any launch post for at least six months. **10 of the 45 are already gone:**
+This chart follows the 45 most-cited benchmarks. Each dot is one launch post that cited it. Rows marked † haven't appeared in any launch post for at least six months. **7 of the 45 are already gone:**
 
 - **HellaSwag**, a mainstay since GPT-3 (last cited September 2024)
 - **MT-Bench** (January 2025)
 - **LiveBench** (September 2025)
 - **Aider-Polyglot** (November 2025)
-- **IFEval** (February 2026)
 - **TAU-bench** (March 2026)
-- **MMMU, MathVista and LiveCodeBench** (all last cited April 2026)
-- **SWE-bench Verified** (April 2026)
+- **MMMU and MathVista** (both last cited April 2026)
 
-The last one is the most notable. In 2025, SWE-bench Verified was *the* coding benchmark. It was cited in 41 launch posts by 10 labs and was the main number in almost every coding claim. Then SWE-bench Pro appeared in December 2025, and by spring 2026 labs had moved to the newer, harder version.
+SWE-bench Verified is close behind. In 2025 it was *the* coding benchmark, cited in 41 launch posts by 10 labs and the main number in almost every coding claim. Then SWE-bench Pro appeared in December 2025 and labs moved to the newer, harder version. Verified's last citation was NVIDIA's Nemotron 3 Ultra in June 2026.
 
 Meanwhile, the newest rows at the bottom of the chart are full of names that didn't exist two years ago: AutomationBench, Agents' Last Exam, DeepSWE, CursorBench, MCP Atlas, GDPval. Benchmarks have shifted from *knowledge* (MMLU, HellaSwag) to *reasoning* (GPQA, AIME, HLE) to *agentic work* (Terminal-Bench, OSWorld, AutomationBench). The graveyard shows that shift.
 
