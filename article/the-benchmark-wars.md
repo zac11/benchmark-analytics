@@ -58,7 +58,7 @@ For eight well-known benchmarks, I took the best score any lab had published and
 The pattern repeats:
 
 - **MMLU** debuted in a frontier launch at 86.4% (GPT-4, March 2023) and crossed 90% within **9 months** (Gemini Ultra).
-- **HumanEval** went from 67% (GPT-4) to 90.2% (GPT-4o) in **14 months**.
+- **HumanEval** debuted with Codex in July 2021 and reached 90.2% (GPT-4o) about **34 months** later.
 - **GPQA Diamond**, the "Google-proof" PhD-level science test, started at 50.4% with Claude 3 Opus in March 2024. It crossed 90% with Gemini 3 Pro in November 2025, about **20 months** later, and the best published score is now 96%.
 - **BrowseComp** went from 49.7% (o3) to 90.1% in about **12 months**.
 - **ARC-AGI-2**, designed specifically to resist current methods, went from **15.9% (Grok 4, July 2025) to 95% (GPT-6 Astra, September 2026) in 14 months.**
