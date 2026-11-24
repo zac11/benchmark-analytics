@@ -9,7 +9,12 @@ ax.axhspan(90,100,color=ACC,alpha=0.07,lw=0); ax.text(0.5,97,'SATURATION ZONE  â
 out=[]
 for b,lab,c in bs:
     s=R[(R['Benchmark (counting label)']==b)&R.v.notna()&R.date.notna()&(R.v>0)&(R.v<=100)].sort_values('date')
-    t0=min([s.date.min()]+F.loc[F.benchmark_family==b,'first_seen'].dropna().tolist()); s=s.groupby('date').v.max().cummax().reset_index()
+    t0=min([s.date.min()]+F.loc[F.benchmark_family==b,'first_seen'].dropna().tolist())
+    if t0<s.date.min():
+        debut=SF[(SF.benchmark_family==b)&(SF.date==t0)]
+        dv=debut.iloc[:,5].map(first_num).dropna() if len(debut) else []
+        if len(dv): s=pd.concat([pd.DataFrame({'date':[t0],'v':[dv.iloc[0]]}),s])
+    s=s.groupby('date').v.max().cummax().reset_index()
     s['m']=(s.date-t0).dt.days/30.44
     x=list(s.m)+[ (pd.Timestamp('2026-11-18')-t0).days/30.44 ]; y=list(s.v)+[s.v.iloc[-1]]
     x=[min(v,40) for v in x]
