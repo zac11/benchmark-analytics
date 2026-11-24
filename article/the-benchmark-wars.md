@@ -117,7 +117,7 @@ A few patterns stand out:
 
 - **Meta (52%), xAI (52%) and OpenAI (51%)** have the most home-grown citations. About half of what they report can't be found in any other lab's launch posts. OpenAI's MedChemBench, for example, appears in 16 of its launch posts and in no one else's.
 - **Z.ai (28%), Anthropic (29%) and DeepSeek (30%)** stick most closely to shared benchmarks, which makes their claims easiest to check against other labs.
-- Labs have favourite benchmarks. **Moonshot AI cites Terminal-Bench in 86% of its recent launches.** **Z.ai cites Humanity's Last Exam in 100% of them.** Anthropic leads with Terminal-Bench (71%) and is one of the few labs that regularly reports OSWorld. Alibaba Qwen covers the broadest range, citing GPQA, LiveCodeBench and MMLU-Pro each in 58% of its launches.
+- Labs have favourite benchmarks. **Moonshot AI cites Terminal-Bench in 86% of its recent launches.** **Z.ai cites Humanity's Last Exam in 100% of them.** Anthropic leads with Terminal-Bench (68%) and is one of the few labs that regularly reports OSWorld. Alibaba Qwen covers the broadest range, citing GPQA, LiveCodeBench and MMLU-Pro each in 58% of its launches.
 
 You can learn a lot about a lab's strategy from which benchmarks it puts first. A lab that leads with agentic coding and computer use is telling you who it is building for. A lab that avoids a shared benchmark everyone else reports is also telling you something.
 

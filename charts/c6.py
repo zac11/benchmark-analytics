@@ -4,7 +4,7 @@ from matplotlib.colors import LinearSegmentedColormap
 fam_np=F.set_index('benchmark_family').n_providers
 SF['excl']=SF.benchmark_family.map(fam_np)==1
 s=SF[SF.date>=pd.Timestamp('2024-01-01')]
-anns=s.groupby('provider').ann.nunique()
+anns=A[A.date>=pd.Timestamp('2024-01-01')].groupby('provider').size()
 top=[b for b in F.sort_values('announcements',ascending=False).benchmark_family if b!='Bench'][:16]
 M=s[s.benchmark_family.isin(top)].groupby(['provider','benchmark_family']).ann.nunique().unstack(fill_value=0).reindex(columns=top,fill_value=0)
 M=M.div(anns,axis=0)*100
